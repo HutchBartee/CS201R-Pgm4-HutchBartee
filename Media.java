@@ -1,4 +1,4 @@
-public class Media{
+public class Media{ // pretty much all taken from lab 8
 
     protected char type;
     protected String title;

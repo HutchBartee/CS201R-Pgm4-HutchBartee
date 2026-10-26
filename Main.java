@@ -1,21 +1,21 @@
 import java.util.*;
 import java.io.*;
 
-// delete Q from media list before adding it to the end after appending new entries
-// clean up error
+// print total on input T
 
 public class Main{
     public static void main(String args[]) {
         System.out.println("~ MEDIA LIBRARY ~");
+        ArrayList<String> rawLib = new ArrayList<String>();
         ArrayList<Media> library = new ArrayList<>(); // create new Media ArrayList
 
-        Scanner scanner = new Scanner(System.in); // set scanner + files
+        // Scanner scanner = new Scanner(System.in); // set scanner + files
         String inputFile = "mediaList.txt";
         String errorFile = "error.txt";
         String reportFile = "report.txt";
         String commandFile = "mediaCommands.txt";
 
-        readFile(inputFile, errorFile, library);
+        readFile(inputFile, errorFile, library, rawLib);
         System.out.println("Media loaded: " + library.size() + " items.");
 
         try(PrintWriter writer = new PrintWriter(new FileWriter(reportFile), true);
@@ -35,12 +35,12 @@ public class Main{
                 while((l = reader.readLine()) != null){
                     String[] items = l.split(","); // splits input into list
                     char typeChoice = items[0].charAt(0);
-                    System.out.println(l);
-                    if(typeChoice != 'M' && typeChoice != 'B' && typeChoice != 'S' && typeChoice != 'A' && typeChoice != 'Q' && typeChoice != 'N'){
-                        errorWriter.write("Invalid input.\n");
+                    if(typeChoice != 'M' && typeChoice != 'B' && typeChoice != 'S' && typeChoice != 'A' && typeChoice != 'Q' && typeChoice != 'N' && typeChoice != 'T'){
+                        errorWriter.write("Invalid input:\n");
+                        errorWriter.write(l + "\n\n");
                     }
                     else{
-                        readInput(l, library, writer, errorWriter);
+                        readInput(l, library, rawLib, writer, errorWriter);
                     }
                 }
                 writer.close();
@@ -52,14 +52,18 @@ public class Main{
 
     }
 
-    public static void readFile(String inputPath, String errorPath, ArrayList<Media> library){ // code lifted + edited from lab 8
+    public static void readFile(String inputPath, String errorPath, ArrayList<Media> library, ArrayList<String> rawLib){ // code lifted + edited from lab 8
         try(BufferedReader reader = new BufferedReader(new FileReader(inputPath));
         BufferedWriter errorWriter = new BufferedWriter(new FileWriter(errorPath))){
             String line;
             while((line = reader.readLine()) != null){ // iterates until end of file
+                rawLib.add(line); // stores raw mediaList.txt text
                 String[] tokens = line.split(","); // splits items into list entries
                 try{
                     if(tokens.length < 7) throw new IllegalArgumentException("Incomplete record"); // throws error if not all relevant items are present
+                    else if(line.charAt(0) == 'Q'){
+                        break;
+                    }
                     else{ // attempts to convert entries into proper variables
                         char type = tokens[0].charAt(0);
                         String title = tokens[1];
@@ -79,10 +83,12 @@ public class Main{
                     }
                 }
                 catch(NumberFormatException e){
-                    errorWriter.write("Error: " + e.getMessage() + " is not an integer — " + line + "\n"); // writes invalid line to error file
+                    errorWriter.write("Error: " + e.getMessage() + " is not an integer:");
+                    errorWriter.write(line + "\n\n"); // writes invalid line to error file
                 }
                 catch(Exception e){
-                    errorWriter.write("Error: " + e.getMessage() + " — " + line + "\n"); // writes invalid line to error file
+                    errorWriter.write("Error: " + e.getMessage() + ":");
+                    errorWriter.write(line + "\n\n"); // writes invalid line to error file
                 }
             }
         }
@@ -91,7 +97,7 @@ public class Main{
         }
     }
 
-    public static void readInput(String input, ArrayList<Media> library, PrintWriter writer, BufferedWriter errorWriter){
+    public static void readInput(String input, ArrayList<Media> library, ArrayList<String> rawLib, PrintWriter writer, BufferedWriter errorWriter){
         String[] items = input.split(","); // splits input into list
         char typeChoice = items[0].charAt(0);
         if(typeChoice == 'N' && items.length >= 8){ // check to see if adding entry
@@ -105,15 +111,35 @@ public class Main{
                 int yearReleased = Integer.parseInt(items[7]);
 
                 FileWriter mlWriter = new FileWriter("mediaList.txt", true);
-                mlWriter.write("\n" + type + "," + title + "," + name + "," + rating + "," + genre + "," + length + "," + type + "," + yearReleased);
+                // clears out MediaList.txt
+                FileWriter clearML = new FileWriter("MediaList.txt");
+                clearML.write("");
+                clearML.close();
+                for(String i : rawLib){ // adds media back into MediaList.txt, skipping and removing Q
+                    if(i.charAt(0) != 'Q'){
+                        mlWriter.write(i + "\n");
+                    }
+                    else if(i.charAt(0) == 'Q'){
+                        rawLib.remove(i);
+                    }
+                }
+                String addString = new String(type + "," + title + "," + name + "," + rating + "," + genre + "," + length + "," + type + "," + yearReleased);
+                rawLib.add(addString); // adds new media into raw library list
+                Media i = new Media(type, title, name, rating, genre, length, yearReleased); // creates new formatted media and adds it to library
+                library.add(i);
+                mlWriter.write(addString + "\n"); // adds new media into MediaList.txt
+                mlWriter.write("Q"); // returns Q to MediaList.txt
                 mlWriter.close();
             }
             catch(Exception e){
-                try{errorWriter.write("Incorrect data input.\n");}
+                try{
+                    errorWriter.write("Incorrect data input:\n");
+                    errorWriter.write(input + "\n\n");
+                }
                 catch(IOException f){ System.err.println("Error reading file: " + f.getMessage()); }
             }
         }
-        else if(typeChoice == 'M' || typeChoice == 'B' || typeChoice == 'S' || typeChoice == 'A'){ // checks medium
+        else if(typeChoice == 'M' || typeChoice == 'B' || typeChoice == 'S' || typeChoice == 'A' || typeChoice == 'T'){ // checks type input
             if(items.length == 1){
                 listMedia(library, writer, typeChoice, "null", -1);
             }
@@ -138,7 +164,10 @@ public class Main{
         }
         else if(typeChoice == 'Q');
         else{
-            try{errorWriter.write("Insufficient amount of data.\n");}
+            try{
+                errorWriter.write("Insufficient amount of data:\n");
+                errorWriter.write(input + "\n\n");
+            }
             catch(IOException f){ System.err.println("Error reading file: " + f.getMessage()); }
         }
     }
@@ -146,7 +175,30 @@ public class Main{
     public static void listMedia(ArrayList<Media> library, PrintWriter writer, Character userType, String userGenre, int userRating){
         writer.write("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
         boolean exists = false; // keeps track of if entries exist
-        if(userGenre == "null" && userRating == -1){ // grab medium
+        if(userType == 'T'){
+            exists = true;
+            ArrayList<Media> movieList = new ArrayList<Media>();
+            ArrayList<Media> bookList = new ArrayList<Media>();
+            ArrayList<Media> songList = new ArrayList<Media>();
+            for(Media i : library){
+                char type = i.getType();
+                if(type == 'M'){
+                    movieList.add(i);
+                }
+                else if(type == 'B'){
+                    bookList.add(i);
+                }
+                else if(type == 'S'){
+                    songList.add(i);
+                }
+            }
+            writer.write("~ YOUR MEDIA LIBRARY ~\n");
+            writer.write(String.format("%-17s%10d\n","Movies",movieList.size()));
+            writer.write(String.format("%-17s%10d\n","Books",bookList.size()));
+            writer.write(String.format("%-17s%10d\n","Songs",songList.size()));
+            writer.write(String.format("%-17s%10d\n","TOTAL",(movieList.size()) + bookList.size() + songList.size()));
+        }
+        else if(userGenre == "null" && userRating == -1){ // grab medium
             for(Media i : library){
                 char type = i.getType();
                 if(type == userType || userType == 'A'){
