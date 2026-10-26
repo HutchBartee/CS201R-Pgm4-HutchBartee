@@ -73,4 +73,14 @@ S,The Mountain Top,Lena Raine,10,Video Game Soundtrack,259,2021,0
 S,Tik Tok,Kesha,9,Pop,199,2009,1
 S,Tranquility Base Hotel & Casino,Arctic Monkeys,10,Rock,211,2018,1
 S,Wake Up,Eden,9,Alternative,279,2015,0
+M,Psych 2: Lassie Come Home,Steve Franks,16,Comedy,115,M,2020
+S,Africa,Toto,7,rock,295,S,1982
+S,Strawberry Fields Forever,Beatles,9,Pop,185,S,1967
+S,Strawberry Fields Forever,Beatles,9,Pop,185,S,1967
+S,Bohemian Rhapsody,Queen,8,rock,355,S,1975
+B,Close Encounters,Steven Spielberg,5,Science Fiction,256,B,1997
+B,Close Encounters,Steven Spielberg,5,Science Fiction,256,B,1997
+B,Lessons in Chemistry,Bonnie Garmus,5,Humor,320,B,2026
+B,Lessons in Chemistry,Bonnie Garmus,5,Humor,320,B,2022
+S,Yellow Submarine,Beatles,8,Pop,310,S,1966
 Q

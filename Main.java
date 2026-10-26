@@ -4,7 +4,7 @@ import java.io.*;
 public class Main{
     public static void main(String args[]) {
         System.out.println("~ MEDIA LIBRARY ~");
-        ArrayList<String> rawLib = new ArrayList<String>();
+        ArrayList<String> rawLib = new ArrayList<String>(); // create new ArrayList to store raw mediaList.txt entries
         ArrayList<Media> library = new ArrayList<>(); // create new Media ArrayList
 
         // Scanner scanner = new Scanner(System.in); // set scanner + files
@@ -20,6 +20,7 @@ public class Main{
             BufferedWriter errorWriter = new BufferedWriter(new FileWriter(errorFile))){
             writer.write("\nLIBRARY\n");
             writer.write(String.format("%-37s%10s%10s     %-23s%7s%n","TITLE","YEAR","RATING","GENRE","MEDIUM"));
+            // test code
             /*String choice = " ";
             while(choice.charAt(0) != 'Q'){
                 choice = scanner.nextLine();
@@ -59,7 +60,7 @@ public class Main{
                 String[] tokens = line.split(","); // splits items into list entries
                 try{
                     if(tokens.length < 7) throw new IllegalArgumentException("Incomplete record"); // throws error if not all relevant items are present
-                    else if(line.charAt(0) == 'Q'){
+                    else if(line.charAt(0) == 'Q'){ // thx Axol
                         break;
                     }
                     else{ // attempts to convert entries into proper variables
@@ -109,11 +110,11 @@ public class Main{
                 int yearReleased = Integer.parseInt(items[7]);
 
                 FileWriter mlWriter = new FileWriter("mediaList.txt", true);
-                // clears out MediaList.txt
-                FileWriter clearML = new FileWriter("MediaList.txt");
+                // clears out mediaList.txt
+                FileWriter clearML = new FileWriter("mediaList.txt");
                 clearML.write("");
                 clearML.close();
-                for(String i : rawLib){ // adds media back into MediaList.txt, skipping and removing Q
+                for(String i : rawLib){ // adds media back into mediaList.txt, skipping and removing Q
                     if(i.charAt(0) != 'Q'){
                         mlWriter.write(i + "\n");
                     }
@@ -125,8 +126,8 @@ public class Main{
                 rawLib.add(addString); // adds new media into raw library list
                 Media i = new Media(type, title, name, rating, genre, length, yearReleased); // creates new formatted media and adds it to library
                 library.add(i);
-                mlWriter.write(addString + "\n"); // adds new media into MediaList.txt
-                mlWriter.write("Q"); // returns Q to MediaList.txt
+                mlWriter.write(addString + "\n"); // adds new media into mediaList.txt
+                mlWriter.write("Q"); // returns Q to mediaList.txt
                 mlWriter.close();
             }
             catch(Exception e){

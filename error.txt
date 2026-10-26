@@ -1,0 +1,45 @@
+Incorrect data input:
+N,M,Hidden Figures,Theodore Melfi,9,Drama,126,2016,Jaraji P Henson,Octavia Spencer,Janelle Monae
+
+Incorrect data input:
+N,S,Respect,Aretha Franklin,ERROR,R&B,281,1967,1
+
+Incorrect data input:
+N,S,Strawberry Fields Forever,Beatles,9,Pop,ERROR,1967,0
+
+Incorrect data input:
+N,B,The Brothers Hawthorne,Jennifer Lynn Barnes,9,Mystery,400,ERROR,0
+
+Invalid input:
+K,Stephen King
+
+Invalid input:
+L,Hidden Figures
+
+Invalid input:
+L,Lost
+
+Invalid input:
+L,Dune
+
+Invalid input:
+F,Octavia Spencer
+
+Invalid input:
+F,Harrison Ford
+
+Invalid input:
+F,Victor Lee
+
+Invalid input:
+K,Harrison Ford
+
+Invalid input:
+K,Steven Spielberg
+
+Invalid input:
+K,Bee Gees
+
+Invalid input:
+K,Beatles
+
