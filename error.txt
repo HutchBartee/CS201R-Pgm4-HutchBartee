@@ -1,8 +1,16 @@
-Error: For input string: "Drama" is not an integer — M,Hidden Figures,9,Drama,126,2016,Jaraji P Henson,Octavia Spencer,Janelle Monae
-Error: Year must be from 1920 to 2024 — B,Hamlet,William Shakespeare,4,Tragedy,214,1600,5
-Error: For input string: "Sci-Fi" is not an integer — B,Fahrenheit 451,Ray Bradbury,Sci-Fi,256,1953,8
-Error: Rating must be from 1 to 10 — M,So I Married an Axe Murderer,Thomas Schlamme,15,Comedy,93,1993,Mike Meyers,Nancy Travis
-Error: Year must be from 1920 to 2024 — B,Crime and Punishment,Fyodor Dostoevsky,7,Crime Fiction,576,1866,15
-Error: Year must be from 1920 to 2024 — S,Baba Yetu,Christopher Tin,10,Choir,203,2025,0
-Error: For input string: "INVALID" is not an integer — S,Blinding Lights,the Weeknd,10,9,INVALID,2020,1
-Error: Incomplete record — Q
+Invalid input.
+Incorrect data input.
+Incorrect data input.
+Incorrect data input.
+Invalid input.
+Invalid input.
+Invalid input.
+Invalid input.
+Invalid input.
+Invalid input.
+Invalid input.
+Invalid input.
+Invalid input.
+Invalid input.
+Invalid input.
+Invalid input.
