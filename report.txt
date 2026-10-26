@@ -1,0 +1,22 @@
+LIBRARY
+TITLE                                      YEAR    RATING     GENRE                   MEDIUM
+To Kill a Mockingbird                      1962         5     Drama                        M
+Ferris Bueller's Day Off                   1986         7     Comedy                       M
+Rocky                                      1976         7     Action                       M
+Jaws                                       1975         5     Action                       M
+Daughters of the Dust                      1991         8     Drama                        M
+Raiders of the Lost Ark                    1981         6     Action                       M
+Star Wars IV                               1977         6     Action                       M
+Mr. Holland's Opus                         1995         8     Drama/Musical                M
+Blade Runner 2049                          2017         9     Sci-Fi                       M
+Jurassic Park                              1993         8     Sci-Fi                       M
+Dune                                       2021         7     Sci-Fi                       M
+Fight Club                                 1999        10     Drama                        M
+Percy Jackson and the Lightning Thief      2010         2     Fantasy                      M
+The Grand Budapest Hotel                   2014         9     Adventure                    M
+Superman                                   1978         8     Sci-Fi                       M
+Spirited Away                              2002         8     Fantasy                      M
+Gone Girl                                  2014        10     Thriller/Mystery             M
+Moonlight                                  2016        10     Drama                        M
+The Wolf of Wallstreet                     2013        10     Comedy                       M
+Maximum Overdrive                          1986         5     Horror                       M
