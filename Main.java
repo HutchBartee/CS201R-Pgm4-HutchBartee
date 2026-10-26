@@ -1,8 +1,6 @@
 import java.util.*;
 import java.io.*;
 
-// print total on input T
-
 public class Main{
     public static void main(String args[]) {
         System.out.println("~ MEDIA LIBRARY ~");
